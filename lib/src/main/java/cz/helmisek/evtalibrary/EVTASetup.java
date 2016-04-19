@@ -7,7 +7,7 @@ import cz.helmisek.evtalibrary.builder.AdapterDataBuilder;
 
 
 /**
- * Created by Jirka Helmich on 04.04.16.
+ * Singleton utility created to manage recycler setup with our builder {@link AdapterDataBuilder}.
  */
 public class EVTASetup
 {

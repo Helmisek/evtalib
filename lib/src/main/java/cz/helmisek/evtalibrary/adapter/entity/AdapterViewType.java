@@ -7,6 +7,8 @@ import cz.helmisek.evtalibrary.adapter.viewholder.BaseViewHolder;
 
 /**
  * Created by Jirka Helmich on 04.04.16.
+ * <p/>
+ * Model class to handle necessary data for item to be displayed and behave correctly.
  */
 public class AdapterViewType
 {

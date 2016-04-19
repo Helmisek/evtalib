@@ -9,11 +9,15 @@ import cz.kinst.jakub.viewmodelbinding.ViewModel;
 
 
 /**
- * Created by Jirka Helmich on 04.04.16.
+ * Base view model class which handles data entity object and also items data binding.
+ * Every item's viewmodel should extend this viewmodel.
  */
 public abstract class BaseAdapterViewModel<O extends Object, X extends ViewDataBinding> extends ViewModel<X>
 {
 
+	/**
+	 * Basically call for click on layout's root view.
+	 */
 	public abstract void onItemClick(View v);
 
 

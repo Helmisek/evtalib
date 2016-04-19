@@ -8,7 +8,7 @@ import cz.helmisek.evtalibrary.adapter.entity.AdapterViewTypeValue;
 
 
 /**
- * Created by Jirka Helmich on 13.04.16.
+ * Helper factory to utilize view type item adding system.
  */
 public class ViewAdapterTypeItemFactory
 {

@@ -14,7 +14,7 @@ import cz.helmisek.evtalibrary.adapter.viewholder.BaseViewHolder;
 
 
 /**
- * Created by Jirka Helmich on 04.04.16.
+ * Data builder class basically allows developer to create custom viewType based list of data using this builder.
  */
 public class AdapterDataBuilder
 {
@@ -24,6 +24,11 @@ public class AdapterDataBuilder
 	private List<AdapterViewType> mAdapterViewTypes = new ArrayList<>();
 
 
+	/**
+	 * Add single viewType item without any provided data.
+	 *
+	 * @param viewTypeId - ViewType ID to determine which type is going to handle your new item
+	 */
 	public AdapterDataBuilder addViewType(int viewTypeId, @LayoutRes int layoutId,
 										  Class<? extends BaseViewHolder> viewHolderClazz, Class<? extends ViewDataBinding> bindingClazz)
 	{
@@ -32,6 +37,12 @@ public class AdapterDataBuilder
 	}
 
 
+	/**
+	 * Add list of viewType items without provided data entities.
+	 *
+	 * @param viewTypeId - ViewType ID to determine which type is going to handle your new item
+	 * @param content - List consisting custom type data entities to be provided for adapter
+	 */
 	public <T extends Object> AdapterDataBuilder addViewTypeItemList(int viewTypeId, List<T> content)
 	{
 		mAdapterViewTypes.addAll(ViewAdapterTypeItemFactory.addViewTypeItemList(mViewTypeList, viewTypeId, content));
@@ -39,6 +50,12 @@ public class AdapterDataBuilder
 	}
 
 
+	/**
+	 * Add single viewType item with custom type provided data entity.
+	 *
+	 * @param viewTypeId    - ViewType ID to determine which type is going to handle your new item
+	 * @param singleContent - Custom type data entity to be provided for this item
+	 */
 	public <T extends Object> AdapterDataBuilder addViewTypeItem(int viewTypeId, T singleContent)
 	{
 
@@ -47,6 +64,11 @@ public class AdapterDataBuilder
 	}
 
 
+	/**
+	 * Add single viewType item without any provided data.
+	 *
+	 * @param viewTypeId - ViewType ID to determine which type is going to handle your new item
+	 */
 	public <T extends Object> AdapterDataBuilder addViewTypeItem(int viewTypeId)
 	{
 
@@ -55,6 +77,11 @@ public class AdapterDataBuilder
 	}
 
 
+	/**
+	 * A build method.
+	 *
+	 * @return list implementation of type {@link AdapterViewType}.
+	 */
 	public List<AdapterViewType> build()
 	{
 		return this.mAdapterViewTypes;

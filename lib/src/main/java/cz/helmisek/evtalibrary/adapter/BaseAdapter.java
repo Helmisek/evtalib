@@ -20,7 +20,9 @@ import cz.helmisek.evtalibrary.builder.ViewAdapterTypeItemFactory;
 
 
 /**
- * Created by Jirka Helmich on 04.04.16.
+ * Base adapter class which handles all necessary operations for you.
+ * It is basically a recycler based adapter which implements CRUD behavior and also handles all view types, items
+ * and specific viewholders.
  */
 public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements AdapterCRUDBehavior
 {
@@ -64,6 +66,9 @@ public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 	}
 
 
+	/**
+	 * Helper method to which creates viewholder instance out of three provided params.
+	 */
 	private BaseViewHolder createViewHolder(Class viewHolderClazz, Class bindingClazz, ViewDataBinding binding)
 	{
 		BaseViewHolder baseViewHolder = null;
@@ -155,7 +160,6 @@ public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 		}
 		else
 		{
-			int sizeNow = mViewTypes.size();
 			mViewTypes.addAll(viewTypes);
 			notifyDataSetChanged();
 		}
@@ -165,9 +169,37 @@ public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
 
 	@Override
+	public <T> void create(List<T> entityList, int viewTypeId, boolean shouldSmoothScroll)
+	{
+		if(entityList != null && !entityList.isEmpty())
+		{
+			final List<AdapterViewType> viewTypes = ViewAdapterTypeItemFactory.addViewTypeItemList(mViewTypes, viewTypeId, entityList);
+
+			mViewTypes.addAll(viewTypes);
+
+			notifyDataSetChanged();
+
+			if(getItemCount() != 0 && shouldSmoothScroll)
+				mRecyclerView.smoothScrollToPosition(getItemCount() - 1);
+		}
+		else
+		{
+			throw new IllegalArgumentException("Provided list is either null or empty");
+		}
+	}
+
+
+	@Override
 	public <T> void create(T entity, int viewTypeId)
 	{
 		create(entity, viewTypeId, true);
+	}
+
+
+	@Override
+	public <T> void create(List<T> entityList, int viewTypeId)
+	{
+		create(entityList, viewTypeId, true);
 	}
 
 
@@ -180,6 +212,18 @@ public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 			return (T) mViewTypes.get(helper.getPosition()).getAdapterViewTypeValue().getDataEntity();
 		}
 		throw new RuntimeException("Provided position is not valid");
+	}
+
+
+	@Override
+	public <T> T read(int position)
+	{
+		if(isPositionValid(position))
+		{
+			return (T) mViewTypes.get(position).getAdapterViewTypeValue().getDataEntity();
+		}
+		throw new RuntimeException("Provided position is not valid");
+
 	}
 
 
@@ -205,7 +249,32 @@ public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
 
 	@Override
-	public <T> void update(int position, int viewTypeId)
+	public void update(int position, int viewTypeId)
+	{
+		if(isPositionValid(position))
+		{
+			notifyDataSetChanged();
+		}
+		else
+			throw new RuntimeException("Provided position is not valid");
+	}
+
+
+	@Override
+	public <T> void update(T entity, int position)
+	{
+		if(isPositionValid(position))
+		{
+			mViewTypes.get(position).getAdapterViewTypeValue().setDataEntity(entity);
+			notifyDataSetChanged();
+		}
+		else
+			throw new RuntimeException("Provided position is not valid");
+	}
+
+
+	@Override
+	public void update(int position)
 	{
 		if(isPositionValid(position))
 		{
@@ -223,6 +292,20 @@ public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 		{
 			ListCursorHelper helper = getCursorHelperForPositionById(position, viewTypeId);
 			mViewTypes.remove(helper.getPosition());
+
+			notifyDataSetChanged();
+		}
+		else
+			throw new RuntimeException("Provided position is not valid");
+	}
+
+
+	@Override
+	public void delete(int position)
+	{
+		if(isPositionValid(position))
+		{
+			mViewTypes.remove(position);
 
 			notifyDataSetChanged();
 		}
@@ -272,6 +355,9 @@ public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 	/* ---- Helper class implementation ---- */
 
 
+	/**
+	 * Small helper class to utilize finding positions and items in specific viewType lists.
+	 */
 	private static class ListCursorHelper
 	{
 		private AdapterViewType mAdapterViewType;

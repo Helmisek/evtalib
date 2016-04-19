@@ -7,6 +7,8 @@ import cz.helmisek.evtalibrary.adapter.viewholder.BaseViewHolder;
 
 /**
  * Created by Jirka Helmich on 04.04.16.
+ *
+ * Model class to hold data for each of items in recycler's adapter.
  */
 public class AdapterViewTypeValue<T extends Object>
 {
