@@ -3,7 +3,6 @@ package cz.helmisek.evtalibrary.adapter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +10,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.helmisek.evtalibrary.EVTASetup;
 import cz.helmisek.evtalibrary.adapter.entity.AdapterViewType;
 import cz.helmisek.evtalibrary.adapter.entity.AdapterViewTypeValue;
 import cz.helmisek.evtalibrary.adapter.viewholder.BaseViewHolder;
-import cz.helmisek.evtalibrary.builder.AdapterDataBuilder;
 import cz.helmisek.evtalibrary.builder.ViewAdapterTypeItemFactory;
 
 
