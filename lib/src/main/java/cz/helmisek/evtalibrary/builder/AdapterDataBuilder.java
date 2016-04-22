@@ -15,6 +15,8 @@ import cz.helmisek.evtalibrary.adapter.viewholder.BaseViewHolder;
 
 /**
  * Data builder class basically allows developer to create custom viewType based list of data using this builder.
+ *
+ * It is recommended to use enum ordinals as viewTypes.
  */
 public class AdapterDataBuilder
 {
