@@ -1,15 +1,12 @@
 package cz.helmisek.evtalibrary.builder;
 
 import android.databinding.ViewDataBinding;
-import android.databinding.tool.util.L;
 import android.support.annotation.LayoutRes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import cz.helmisek.evtalibrary.adapter.entity.AdapterViewType;
-import cz.helmisek.evtalibrary.adapter.entity.AdapterViewTypeValue;
 import cz.helmisek.evtalibrary.adapter.viewholder.BaseViewHolder;
 
 
