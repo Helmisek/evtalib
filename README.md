@@ -4,7 +4,7 @@ EVTA Lib - is shorthand for (EasyViewTypeAdapter) Library. It is designed to hel
 ## Install
 
 ```groovy
-compile 'soon' 
+compile 'compile 'cz.helmisek:evtalibrary:1.0.0' 
 ```
 
 ## How to use
