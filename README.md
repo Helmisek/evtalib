@@ -14,6 +14,8 @@ Library does also support multiple view types and adapter supports CRUD operatio
 
 If you want you may like to take a look at my sample project to understand better.
 
+See: https://github.com/Helmisek/evtalib-demo
+
 ## Changelog
 
 v1.0.0 (Initial version)
